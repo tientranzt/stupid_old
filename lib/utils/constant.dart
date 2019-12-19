@@ -19,7 +19,7 @@ InputDecoration kTextFieldStyle(
     {@required String hint, @required IconData preIcon}) {
   return InputDecoration(
     border: InputBorder.none,
-    hintStyle: TextStyle(fontSize: 17,fontFamily: 'OpenSans'),
+    hintStyle: TextStyle(fontSize: 17,fontFamily: 'Quicksand'),
     prefixIcon: Icon(
       preIcon,
       color: Colors.black,

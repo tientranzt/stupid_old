@@ -19,7 +19,7 @@ class TextFieldCustom extends StatelessWidget {
       child: TextField(
         obscureText: obscureText,
         style: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.w400, fontSize: 17),
         decoration: kTextFieldStyle(hint: hint, preIcon: iconData),
       ),
     );

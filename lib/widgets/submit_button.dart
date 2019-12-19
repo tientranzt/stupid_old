@@ -12,7 +12,7 @@ class SubmitButton extends StatelessWidget {
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,fontFamily: 'OpenSans'),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,fontFamily: 'Quicksand'),
         ),
         Container(
           width: 60,
@@ -24,10 +24,10 @@ class SubmitButton extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xFFb3e6b3),
-                    Color(0xFF66cc66),
-                    Color(0xFF39ac39),
-                    Color(0xFF2d862d),
+                    Color(0xFF9de2c8),
+                    Color(0xFF4eca9d),
+                    Color(0xFF35b183),
+                    Color(0xFF2b906b),
                   ])),
           child: IconButton(
             icon: Icon(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test_stupid/widgets/submit_button.dart';
-import '../widgets/text_field.dart';
+import 'package:test_stupid/widgets/text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login';
@@ -24,7 +24,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                     child: IntrinsicHeight(
                       child: Column(
-//                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,9 +32,10 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   'Chào!',
                                   style: TextStyle(
+                                    color: Color(0xFF2b906b),
                                       fontSize: 60,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: 'OpenSans'),
+                                      fontFamily: 'Quicksand'),
                                 ),
                                 padding: EdgeInsets.only(top: 100),
                               ),
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: 'OpenSans'),
+                                      fontFamily: 'Quicksand'),
                                 ),
                               ),
                             ],
@@ -83,16 +83,18 @@ class LoginScreen extends StatelessWidget {
                                       child: Text(
                                         'Tạo tài khoản',
                                         style: TextStyle(
-                                            decoration: TextDecoration
-                                                .underline,
+                                            decoration:
+                                                TextDecoration.underline,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
-                                            fontFamily: 'OpenSans'),
+                                            fontFamily: 'Quicksand'),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 30,)
+                                SizedBox(
+                                  height: 30,
+                                )
                               ],
                             ),
                           )
