@@ -25,4 +25,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Quicksand-Regular.ttf
         - asset: assets/fonts/Quicksand-Bold.ttf
+  assets:
+    - assets/images/demo_account.jpg
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_stupid/pages/home_screen.dart';
 
 class SubmitButton extends StatelessWidget {
   final String title;
@@ -16,7 +17,7 @@ class SubmitButton extends StatelessWidget {
         ),
         Container(
           width: 60,
-          margin: EdgeInsets.only(left: 8),
+          margin: EdgeInsets.only(left: 8, bottom: 15),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.horizontal(
                   left: Radius.circular(24), right: Radius.circular(24)),
@@ -35,7 +36,7 @@ class SubmitButton extends StatelessWidget {
               size: 26,
             ),
             onPressed: () {
-              print(this.title);
+              Navigator.of(context).pushNamed(HomeScreen.id);
             },
             color: Colors.white,
 
