@@ -4,7 +4,7 @@ description: A personal project of tientran
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,6 +12,7 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.5.0
+  provider: ^4.0.0
 
 
 dev_dependencies:
@@ -24,7 +25,12 @@ flutter:
     - family: Quicksand
       fonts:
         - asset: assets/fonts/Quicksand-Regular.ttf
-        - asset: assets/fonts/Quicksand-Bold.ttf
+
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/Pacifico-Regular.ttf
+
   assets:
-    - assets/images/demo_account.jpg
+    - assets/images/
+    - assets/images/zodiac/
 

@@ -5,7 +5,6 @@ class GameList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-
       children: <Widget>[
         ListGame(
           color: Color(0xFF237658),
@@ -20,7 +19,7 @@ class GameList extends StatelessWidget {
           routeGame: 'count_sheep_game',
         ),
         ListGame(
-          color:Color(0xFF237658),
+          color: Color(0xFF237658),
           icon: Icons.score,
           title: 'Ngón tay quyền năng',
           routeGame: 'power_finger_game',
