@@ -1,7 +1,4 @@
-import 'package:flutter/foundation.dart';
-
-class AnimalGameProvider extends ChangeNotifier{
-
+class AnimalGameProvider {
   Map<String, Map<String, dynamic>> _listZodiac = {
     'ti': {'name': 'Chuột', 'score': 1},
     'suu': {'name': 'Trâu', 'score': 2},
