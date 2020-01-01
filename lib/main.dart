@@ -17,7 +17,7 @@ void main() => runApp(
         ],
         child:
         MaterialApp(
-          initialRoute: AnimalMathGame.id,
+          initialRoute: LoginScreen.id,
           routes: {
             LoginScreen.id: (_) => LoginScreen(),
             CreateAccountScreen.id: (_) => CreateAccountScreen(),

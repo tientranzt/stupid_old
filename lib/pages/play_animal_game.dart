@@ -129,61 +129,72 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
   Future<void> _neverSatisfied() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return _countQuestion == 10 ? AlertDialog(
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text('Xong phim'),
+        return WillPopScope(
+          onWillPop: () async => false,
+          child:  _countQuestion == 10 ? AlertDialog(
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Text('Câu $_countQuestion'),
+                  isTrue
+                      ? Text('Thật trúy tệ',
+                      style: TextStyle(fontFamily: 'Quicksand'))
+                      : Text(
+                    'Ngu người',
+                    style: TextStyle(fontFamily: 'Quicksand'),
+                  ),
+                  isTrue ? Text('+20 điểm') : Text('+0 điểm'),
+                  FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    color: Color(0xFF237658),
+                    child: Text(
+                      'Về trang chủ',
+                      style:
+                      TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('animal_math_game');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ): AlertDialog(
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Text('Câu $_countQuestion'),
+                  isTrue
+                      ? Text('Thật trúy tệ',
+                      style: TextStyle(fontFamily: 'Quicksand'))
+                      : Text(
+                    'Ngu người',
+                    style: TextStyle(fontFamily: 'Quicksand'),
+                  ),
+                  isTrue ? Text('+20 điểm') : Text('+0 điểm'),
+                  FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    color: Color(0xFF237658),
+                    child: Text(
+                      'Tiếp',
+                      style:
+                      TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      nextGame();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ) ,
+        ) ;
 
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  color: Color(0xFF237658),
-                  child: Text(
-                    'Về trang chủ',
-                    style:
-                    TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('animal_math_game');
-                  },
-                ),
-              ],
-            ),
-          ),
-        ): AlertDialog(
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text('Câu $_countQuestion'),
-                isTrue
-                    ? Text('Thật trúy tệ',
-                        style: TextStyle(fontFamily: 'Quicksand'))
-                    : Text(
-                        'Ngu người',
-                        style: TextStyle(fontFamily: 'Quicksand'),
-                      ),
-                isTrue ? Text('+20 điểm') : Text('+0 điểm'),
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  color: Color(0xFF237658),
-                  child: Text(
-                    'Tiếp',
-                    style:
-                        TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    nextGame();
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
       },
     );
   }
