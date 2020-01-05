@@ -17,5 +17,4 @@ class AnimalGameProvider {
   Map<String, Map<String, dynamic>> get listZodiac {
     return _listZodiac;
   }
-
 }

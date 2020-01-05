@@ -43,8 +43,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       } else {
         showAlert();
       }
-    } else {
-      showAlert();
     }
   }
 
