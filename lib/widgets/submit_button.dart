@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_stupid/pages/home_screen.dart';
+import 'package:test_stupid/pages/login_sceen.dart';
 
 class SubmitButton extends StatelessWidget {
   final String title;
+  final Function handleSubmit;
 
-  SubmitButton({@required this.title});
+  SubmitButton({@required this.title, this.handleSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,8 @@ class SubmitButton extends StatelessWidget {
               size: 26,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed(HomeScreen.id);
+              handleSubmit();
+//              Navigator.of(context).pushNamed(LoginScreen.id);
             },
             color: Colors.white,
 

@@ -5,11 +5,11 @@ class TextFieldCustom extends StatelessWidget {
   final String hint;
   final IconData iconData;
   final bool obscureText;
-
+  final TextEditingController controller;
   TextFieldCustom(
       {@required this.hint,
       @required this.iconData,
-      this.obscureText = false});
+      this.obscureText = false, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +17,7 @@ class TextFieldCustom extends StatelessWidget {
       margin: EdgeInsets.only(top: 20),
       decoration: kTextFieldContainer(),
       child: TextField(
+        controller: controller,
         obscureText: obscureText,
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.w400, fontSize: 17),

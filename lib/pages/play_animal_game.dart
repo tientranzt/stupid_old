@@ -249,7 +249,7 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            child: Text('$_countQuestion/10'),
+                            child: Text('$_countQuestion/10', style: TextStyle(fontFamily: 'Quicksand'),),
                           ),
                           Container(
                             margin: EdgeInsets.all(15),

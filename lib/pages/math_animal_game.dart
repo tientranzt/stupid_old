@@ -56,7 +56,7 @@ class AnimalMathGame extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  IconButton(icon: Icon(Icons.home,size: 30,), onPressed: (){ Navigator.pushNamed(context, 'home');}),
+                  IconButton(icon: Icon(Icons.home,size: 30,), onPressed: (){ Navigator.of(context).pop();}),
                   SizedBox(width: 5,),
                   RaisedButton(
                     shape: RoundedRectangleBorder(

@@ -11,7 +11,7 @@ class SocialIcon extends StatelessWidget {
       iconSize: 38,
       icon: Icon(icon),
       onPressed: () {},
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       color: color,
     );
   }
