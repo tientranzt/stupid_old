@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test_stupid/widgets/list_game.dart';
 
 class GameList extends StatelessWidget {
+  final String loginUser;
+  GameList({this.loginUser});
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -11,6 +13,7 @@ class GameList extends StatelessWidget {
           icon: Icons.email,
           title: 'Làm toán siêu thú',
           routeGame: 'animal_math_game',
+          loginUser: loginUser,
         ),
         ListGame(
           color: Color(0xFFcccc00),

@@ -1,4 +1,5 @@
 class AnimalGameProvider {
+
   Map<String, Map<String, dynamic>> _listZodiac = {
     'ti': {'name': 'Chuột', 'score': 1},
     'suu': {'name': 'Trâu', 'score': 2},
@@ -13,6 +14,7 @@ class AnimalGameProvider {
     'tuat': {'name': 'Chó', 'score': 11},
     'hoi': {'name': 'Heo', 'score': 12},
   };
+
 
   Map<String, Map<String, dynamic>> get listZodiac {
     return _listZodiac;

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ListGame extends StatelessWidget {
   final String title;
   final icon;
   final color;
   final String routeGame;
+  final loginUser;
 
-
-  ListGame({this.title, this.icon, this.color, this.routeGame});
+  ListGame({this.title, this.icon, this.color, this.routeGame, this.loginUser});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class ListGame extends StatelessWidget {
         ),
         color: Colors.white,
         onPressed: () {
-          Navigator.pushNamed(context, routeGame);
+          Navigator.pushNamed(context, routeGame, arguments: [loginUser]);
         },
       ),
     );

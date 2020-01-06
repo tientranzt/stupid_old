@@ -10,6 +10,7 @@ class AnimalMathGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -56,8 +57,17 @@ class AnimalMathGame extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  IconButton(icon: Icon(Icons.home,size: 30,), onPressed: (){ Navigator.of(context).pop();}),
-                  SizedBox(width: 5,),
+                  IconButton(
+                      icon: Icon(
+                        Icons.home,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'home', arguments: []);
+                      }),
+                  SizedBox(
+                    width: 5,
+                  ),
                   RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),

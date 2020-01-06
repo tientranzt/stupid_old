@@ -5,7 +5,6 @@ import 'package:test_stupid/widgets/submit_button.dart';
 import 'package:test_stupid/widgets/text_field.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login';
@@ -46,11 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       .add({'name': currentUser.email, 'score': '0'})
                 }
             });
-        _userLoginController.clear();
-        _passLoginController.clear();
+//        _userLoginController.clear();
+//        _passLoginController.clear();
 
         Navigator.pushNamed(context, 'home',
-            arguments: [currentUser.email.toString()]);
+            arguments: [currentUser.email]);
 
         setState(() {
           showSpinner = false;
