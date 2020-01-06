@@ -134,70 +134,71 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return WillPopScope(
-          onWillPop: () async => false,
-          child: _countQuestion == 10
-              ? AlertDialog(
-                  content: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Text('Câu $_countQuestion'),
-                        isTrue
-                            ? Text('Thật trúy tệ',
-                                style: TextStyle(fontFamily: 'Quicksand'))
-                            : Text(
+            onWillPop: () async => false,
+            child: AlertDialog(
+              content: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Text('Câu $_countQuestion'),
+                    isTrue
+                        ? Column(
+                            children: <Widget>[
+                              Text('ĐÚNG RỒI',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Quicksand')),
+                              Text('Thật trúy tệ',
+                                  style: TextStyle(fontFamily: 'Quicksand'))
+                            ],
+                          )
+                        : Column(
+                            children: <Widget>[
+                              Text('SAI NHÁ',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Quicksand')),
+                              Text(
                                 'Ngu người',
                                 style: TextStyle(fontFamily: 'Quicksand'),
-                              ),
-                        isTrue ? Text('+20 điểm') : Text('+0 điểm'),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          color: Color(0xFF237658),
-                          child: Text(
-                            'Về trang chủ',
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Quicksand'),
+                              )
+                            ],
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('animal_math_game');
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : AlertDialog(
-                  content: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Text('Câu $_countQuestion'),
-                        isTrue
-                            ? Text('Thật trúy tệ',
-                                style: TextStyle(fontFamily: 'Quicksand'))
-                            : Text(
-                                'Ngu người',
-                                style: TextStyle(fontFamily: 'Quicksand'),
-                              ),
-                        isTrue ? Text('+20 điểm') : Text('+0 điểm'),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          color: Color(0xFF237658),
-                          child: Text(
-                            'Tiếp',
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Quicksand'),
+                    isTrue ? Text('+20 điểm') : Text('+0 điểm'),
+                    _countQuestion == 10
+                        ? FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            color: Color(0xFF237658),
+                            child: Text(
+                              'Về trang chủ',
+                              style: TextStyle(
+                                  color: Colors.white, fontFamily: 'Quicksand'),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed('animal_math_game');
+                            },
+                          )
+                        : FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            color: Color(0xFF237658),
+                            child: Text(
+                              'Tiếp',
+                              style: TextStyle(
+                                  color: Colors.white, fontFamily: 'Quicksand'),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              nextGame();
+                            },
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            nextGame();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  ],
                 ),
-        );
+              ),
+            ));
       },
     );
   }
@@ -322,7 +323,7 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                       Expanded(
                         child: Container(
                           padding:
-                              EdgeInsets.only(left: 40, right: 40, bottom: 20),
+                              EdgeInsets.only(left: 60, right: 60, bottom: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -350,23 +351,28 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                                 clickAnswerButton: clickAnswerButton,
                                 colorButton: listColorAnswer[3],
                               ),
-
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.redAccent,
-                                        shape: BoxShape.circle),
-                                    child: FlatButton(
-                                      splashColor: Colors.transparent,
-                                      color: Colors.transparent,
-                                      child: Icon(
-                                        Icons.question_answer,
-                                        color: Colors.white,
-                                      ),
-                                      onPressed: () {print('hello');},
-                                    ),
-                                  )
-
-
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.redAccent,
+                                    shape: BoxShape.circle),
+                                child: FlatButton(
+                                  hoverColor: Colors.green,
+                                  focusColor: Colors.green,
+                                  splashColor: Colors.transparent,
+                                  color: Colors.transparent,
+                                  child: Icon(
+                                    Icons.question_answer,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _neverSatisfied();
+                                      flatAlertMessage = false;
+                                      _timer.cancel();
+                                    });
+                                  },
+                                ),
+                              )
                             ],
                           ),
                         ),

@@ -4,7 +4,7 @@ class AnimalAnswer extends StatelessWidget {
   final int title;
   final int indexResult;
   final Function clickAnswerButton;
-  Color colorButton;
+  final Color colorButton;
 
   AnimalAnswer(
       {this.title, this.indexResult, this.clickAnswerButton, this.colorButton});
