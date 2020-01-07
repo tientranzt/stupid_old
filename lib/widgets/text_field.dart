@@ -19,6 +19,7 @@ class TextFieldCustom extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        keyboardType: hint == 'Email'? TextInputType.emailAddress : TextInputType.text ,
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.w400, fontSize: 17),
         decoration: kTextFieldStyle(hint: hint, preIcon: iconData),

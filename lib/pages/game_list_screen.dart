@@ -3,11 +3,21 @@ import 'package:test_stupid/widgets/list_game.dart';
 
 class GameList extends StatelessWidget {
   final String loginUser;
+
   GameList({this.loginUser});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
+        Center(
+            child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+            'Chơi game trí tuệ giúp giảm độ ngu',
+            style: TextStyle(color: Colors.red, fontFamily: 'Quicksand',fontWeight: FontWeight.bold),
+          ),
+        )),
         ListGame(
           color: Color(0xFF237658),
           icon: Icons.email,

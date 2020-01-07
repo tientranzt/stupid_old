@@ -155,26 +155,25 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Text('Câu $_countQuestion'),
                     isTrue
                         ? Column(
                             children: <Widget>[
-                              Text('ĐÚNG RỒI',
+                              Text('ĐÚNG',
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: 'Quicksand')),
+                                      fontFamily: 'Quicksand', fontSize: 40)),
                               Text('Thật trúy tệ',
                                   style: TextStyle(fontFamily: 'Quicksand'))
                             ],
                           )
                         : Column(
                             children: <Widget>[
-                              Text('SAI NHÁ',
+                              Text('SAI',
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: 'Quicksand')),
+                                      fontFamily: 'Quicksand', fontSize: 40)),
                               Text(
                                 'Ngu người',
                                 style: TextStyle(fontFamily: 'Quicksand'),
@@ -182,8 +181,8 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                             ],
                           ),
                     isTrue
-                        ? Text('+${widget.scoreOfQuestion}')
-                        : Text('-${widget.scoreSubstract}'),
+                        ? Text('Độ ngu giảm ${widget.scoreOfQuestion} điểm')
+                        : Text('Độ ngu tăng ${widget.scoreSubstract} điểm'),
                     _countQuestion == widget.totalQuestion
                         ? FlatButton(
                             shape: RoundedRectangleBorder(

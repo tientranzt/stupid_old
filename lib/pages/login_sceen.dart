@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   TextFieldCustom(
-                    hint: 'Tài khoản',
+                    hint: 'Email',
                     iconData: Icons.account_circle,
                     controller: _userLoginController,
                   ),
