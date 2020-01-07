@@ -27,35 +27,87 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       showSpinner = true;
     });
-    try {
-      final user = await _auth.signInWithEmailAndPassword(
-          email: _userLoginController.text,
-          password: _passLoginController.text);
-      if (user != null) {
-        final currentUser = await _auth.currentUser();
-        var isUserStoreExist = _firestore
-            .collection('scores')
-            .where('name', isEqualTo: currentUser.email)
-            .getDocuments();
-        isUserStoreExist.then((val) => {
-              if (val.documents.length == 0)
-                {
-                  _firestore
-                      .collection('scores')
-                      .add({'name': currentUser.email, 'score': '0'})
-                }
-            });
+    if (_userLoginController.text.isNotEmpty &&
+        _passLoginController.text.isNotEmpty) {
+      try {
+        final user = await _auth.signInWithEmailAndPassword(
+            email: _userLoginController.text,
+            password: _passLoginController.text);
+        print(user == null);
+        if (user != null) {
+          final currentUser = await _auth.currentUser();
+          var isUserStoreExist = _firestore
+              .collection('scores')
+              .where('name', isEqualTo: currentUser.email)
+              .getDocuments();
+          isUserStoreExist.then((val) => {
+                if (val.documents.length == 0)
+                  {
+                    _firestore
+                        .collection('scores')
+                        .document(currentUser.email)
+                        .setData({'name': currentUser.email, 'score': '0'})
+                  }
+              });
 //        _userLoginController.clear();
 //        _passLoginController.clear();
 
-        Navigator.pushNamed(context, 'home',
-            arguments: [currentUser.email]);
+          Navigator.pushNamed(context, 'home', arguments: [currentUser.email]);
 
+          setState(() {
+            showSpinner = false;
+          });
+        }
+
+
+      } catch (err) {
         setState(() {
           showSpinner = false;
         });
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Lỗi đăng nhập',style: TextStyle(fontFamily: 'Quicksand')),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('Email hoặc tài khoản không đúng !',style: TextStyle(fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[FlatButton(
+                  child: Text('Để kiểm tra lại.',style: TextStyle(fontFamily: 'Quicksand')),
+                  onPressed: () => Navigator.of(context).pop(),
+                )],
+              );
+            });
       }
-    } catch (err) {}
+    } else {
+      setState(() {
+        showSpinner = false;
+      });
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Lỗi đăng nhập', style: TextStyle(fontFamily: 'Quicksand'),),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Email và mật khẩu không được trống!',style: TextStyle(fontFamily: 'Quicksand')),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Để kiểm tra lại.',style: TextStyle(fontFamily: 'Quicksand')),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+              ],
+            );
+          });
+    }
   }
 
   @override

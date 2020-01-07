@@ -5,8 +5,19 @@ class LevelDifficultGame extends StatelessWidget {
   final String title;
   final color;
   final int levelDifficult;
+  final int scoreOfQuestion;
+  final int scoreSubtract;
+  final String loginUser;
+  final int totalQuestion;
 
-  LevelDifficultGame({this.title, this.color, this.levelDifficult});
+  LevelDifficultGame(
+      {this.title,
+      this.color,
+      this.levelDifficult,
+      this.loginUser,
+      this.scoreOfQuestion,
+      this.scoreSubtract,
+      this.totalQuestion});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +37,10 @@ class LevelDifficultGame extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => PlayAnimalGame(
                       levelDifficultTimer: levelDifficult,
+                      loginUser: loginUser,
+                      scoreOfQuestion: scoreOfQuestion,
+                      scoreSubstract: scoreSubtract,
+                      totalQuestion: totalQuestion,
                     )));
       },
     );

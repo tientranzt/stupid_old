@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> nameUser = ModalRoute.of(context).settings.arguments;
+    final List<dynamic> nameUser = ModalRoute.of(context).settings.arguments;
     final String name = nameUser[0].split('@')[0];
     final sizeScreen = (MediaQuery.of(context).size.height) / 2;
     return WillPopScope(
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         FlatButton.icon(
                           onPressed: () {
                             _auth.signOut();
-                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, 'login');
                           },
                           icon: Icon(
                             Icons.exit_to_app,
@@ -109,14 +109,14 @@ class HomeScreen extends StatelessWidget {
                                   snapshot.data.documents[0]['score'];
                               return CircleIcon(
                                 icon: Icons.star,
-                                title: 'Điểm',
+                                title: 'Độ ngu',
                                 score: score,
                               );
                             }),
                         StreamBuilder<QuerySnapshot>(
                             stream: _firestore
                                 .collection('scores')
-                                .orderBy('score', descending: true)
+                                .orderBy('score')
                                 .snapshots(),
                             builder: (context, snapshot) {
                               int rank = 0;
@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                               }
                               return CircleIcon(
                                 icon: Icons.supervisor_account,
-                                title: 'Hạng',
+                                title: 'Hạng ngu',
                                 score: rank.toString(),
                               );
                             }),

@@ -6,19 +6,30 @@ import 'dart:async';
 import 'dart:math';
 import 'package:test_stupid/widgets/animal_answer.dart';
 import 'package:test_stupid/widgets/animal_question.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PlayAnimalGame extends StatefulWidget {
   static const String id = 'play_animal_game';
 
   final int levelDifficultTimer;
+  final String loginUser;
+  final int scoreOfQuestion;
+  final int scoreSubstract;
+  final int totalQuestion;
 
-  PlayAnimalGame({this.levelDifficultTimer});
+  PlayAnimalGame(
+      {this.levelDifficultTimer,
+      this.loginUser,
+      this.scoreOfQuestion,
+      this.scoreSubstract,
+      this.totalQuestion});
 
   @override
   _PlayAnimalGameState createState() => _PlayAnimalGameState();
 }
 
 class _PlayAnimalGameState extends State<PlayAnimalGame> {
+  Firestore _firestore = Firestore.instance;
   Timer _timer;
   int _startTimer;
   int _countQuestion = 1;
@@ -28,6 +39,7 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
   bool isTrue = false;
   bool flatAlertMessage = true;
   int totalScore = 0;
+  int currentPointOnFirebase = 0;
 
   Color colorButton = Colors.white;
   List<Color> listColorAnswer = [
@@ -115,7 +127,11 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
         Colors.white,
         Colors.white
       ];
-      isTrue ? totalScore += 20 : totalScore -= 30;
+
+      isTrue
+          ? totalScore += widget.scoreOfQuestion
+          : totalScore -= widget.scoreSubstract;
+
       isTrue = false;
       flatAlertMessage = true;
       _countQuestion++;
@@ -165,8 +181,10 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                               )
                             ],
                           ),
-                    isTrue ? Text('+20 điểm') : Text('+0 điểm'),
-                    _countQuestion == 10
+                    isTrue
+                        ? Text('+${widget.scoreOfQuestion}')
+                        : Text('-${widget.scoreSubstract}'),
+                    _countQuestion == widget.totalQuestion
                         ? FlatButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
@@ -177,8 +195,21 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                                   color: Colors.white, fontFamily: 'Quicksand'),
                             ),
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('animal_math_game');
+                              try {
+                                int scoreSum =
+                                    currentPointOnFirebase - totalScore;
+                                isTrue ? scoreSum -= 20 : scoreSum -= -30;
+                                String scoreUpdate = scoreSum.toString();
+                                _firestore
+                                    .collection('scores')
+                                    .document(widget.loginUser)
+                                    .updateData({
+                                  'score': scoreUpdate,
+                                });
+                              } catch (e) {}
+                              Navigator.of(context).pushNamed(
+                                  'animal_math_game',
+                                  arguments: [widget.loginUser]);
                             },
                           )
                         : FlatButton(
@@ -220,7 +251,18 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
   @override
   void initState() {
     super.initState();
+
     setState(() {
+      _firestore
+          .collection('scores')
+          .where('name', isEqualTo: widget.loginUser)
+          .getDocuments()
+          .then((userScore) {
+        if (userScore.documents.length != 0) {
+          currentPointOnFirebase = int.parse(userScore.documents[0]['score']);
+          print(currentPointOnFirebase);
+        }
+      });
       _startTimer = widget.levelDifficultTimer ?? 0;
       get4RandomZodiac();
     });
@@ -254,7 +296,7 @@ class _PlayAnimalGameState extends State<PlayAnimalGame> {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              '$_countQuestion/10',
+                              '$_countQuestion/${widget.totalQuestion}',
                               style: TextStyle(fontFamily: 'Quicksand'),
                             ),
                           ),

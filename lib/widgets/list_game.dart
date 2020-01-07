@@ -11,6 +11,7 @@ class ListGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ListTile(
       leading: CircleAvatar(
        maxRadius: 20,

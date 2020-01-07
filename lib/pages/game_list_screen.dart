@@ -20,18 +20,21 @@ class GameList extends StatelessWidget {
           icon: Icons.data_usage,
           title: 'Đếm cừu ít khi đúng',
           routeGame: 'count_sheep_game',
+          loginUser: loginUser,
         ),
         ListGame(
           color: Color(0xFF237658),
           icon: Icons.score,
           title: 'Ngón tay quyền năng',
           routeGame: 'power_finger_game',
+          loginUser: loginUser,
         ),
         ListGame(
           color: Color(0xFFcccc00),
           icon: Icons.supervisor_account,
           title: 'Trả lời câu hỏi ngu',
           routeGame: 'stupid_question_game',
+          loginUser: loginUser,
         ),
       ],
     );

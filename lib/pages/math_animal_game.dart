@@ -10,7 +10,7 @@ class AnimalMathGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    List<dynamic> loginUser = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -37,17 +37,29 @@ class AnimalMathGame extends StatelessWidget {
                   LevelDifficultGame(
                     title: 'Dễ',
                     color: Color(0xFF4eca9d),
-                    levelDifficult: 20,
+                    levelDifficult: 15,
+                    loginUser: loginUser[0],
+                    scoreOfQuestion: 20,
+                    scoreSubtract: 22,
+                    totalQuestion: 5,
                   ),
                   LevelDifficultGame(
                     title: 'Vừa',
                     color: Color(0xFF2b906b),
-                    levelDifficult: 15,
+                    levelDifficult: 10,
+                    loginUser: loginUser[0],
+                    scoreOfQuestion: 30,
+                    scoreSubtract: 35,
+                    totalQuestion: 7,
                   ),
                   LevelDifficultGame(
                     title: 'Khó',
                     color: Color(0xFF1d6249),
-                    levelDifficult: 10,
+                    levelDifficult: 5,
+                    loginUser: loginUser[0],
+                    scoreOfQuestion: 60,
+                    scoreSubtract: 72,
+                    totalQuestion: 10,
                   ),
                 ],
               ),
@@ -63,7 +75,8 @@ class AnimalMathGame extends StatelessWidget {
                         size: 30,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, 'home', arguments: []);
+                        Navigator.pushNamed(context, 'home',
+                            arguments: [loginUser[0]]);
                       }),
                   SizedBox(
                     width: 5,
