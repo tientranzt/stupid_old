@@ -28,7 +28,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         await _auth
             .fetchSignInMethodsForEmail(email: _emailController.text)
             .then((value) {
-          if (value.length > 0) isEmailExist = true;
+          if (value.length > 0) {
+            isEmailExist = true;
+          }
         });
       } catch (err) {
         isEmailExist = false;
@@ -40,9 +42,66 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         _emailController.clear();
         _passwordController.clear();
         _passwordConfirmController.clear();
+//        Navigator.pushNamed(context, 'login');
+        showDialog(
+            context: context,
+            builder: (context) {
+              var style = TextStyle(
+                fontFamily: 'Quicksand',
+              );
+              return WillPopScope(
+                onWillPop: () async => false,
+                child: AlertDialog(
+                  title: Text(
+                    'Thành công !',
+                    style: style,
+                  ),
+                  content: SingleChildScrollView(
+                      child: Text(
+                    'Đăng ký tài khoản thành công !',
+                    style: style,
+                  )),
+                  actions: <Widget>[
+                    FlatButton(
+                        child: Text(
+                          'Đăng nhập',
+                          style: style,
+                        ),
+                        onPressed: () => Navigator.pushNamed(context, 'login'))
+                  ],
+                ),
+              );
+            });
       } else {
         showAlert();
       }
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            var style = TextStyle(
+              fontFamily: 'Quicksand',
+            );
+            return AlertDialog(
+              title: Text(
+                'Thông tin sai !',
+                style: style,
+              ),
+              content: SingleChildScrollView(
+                  child: Text(
+                'Các ô không được trống',
+                style: style,
+              )),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text(
+                      'Đã hiểu',
+                      style: style,
+                    ),
+                    onPressed: () => Navigator.of(context).pop())
+              ],
+            );
+          });
     }
   }
 
@@ -87,10 +146,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   }
 
   int checkPasswordValid(String pass) {
-    if (pass.isEmpty || pass.length < 6) return 0;
+    if (pass.isEmpty || pass.length < 6) {
+      return 0;
+    }
     if (_passwordController.text != _passwordConfirmController.text &&
         pass.isNotEmpty &&
-        _passwordController.text.isNotEmpty) return 1;
+        _passwordController.text.isNotEmpty) {
+      return 1;
+    }
     return 2;
   }
 
@@ -143,7 +206,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       obscureText: true,
                       controller: _passwordConfirmController,
                     ),
-
                     SizedBox(
                       height: 40,
                     ),
@@ -154,36 +216,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     SizedBox(
                       height: 25,
                     ),
-//                      Text(
-//                        'Đăng nhập bằng hình thức khác',
-//                        style: TextStyle(
-//                            fontSize: 16,
-//                            fontWeight: FontWeight.w400,
-//                            fontFamily: 'Quicksand'),
-//                      ),
                   ],
                 ),
               ),
-//                Container(
-//                  child: Row(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    mainAxisSize: MainAxisSize.min,
-//                    children: <Widget>[
-//                      SocialIcon(
-//                        color: Colors.indigo,
-//                        icon: FontAwesomeIcons.facebook,
-//                      ),
-//                      SocialIcon(
-//                        color: Colors.blue,
-//                        icon: FontAwesomeIcons.twitter,
-//                      ),
-//                      SocialIcon(
-//                        color: Colors.red,
-//                        icon: FontAwesomeIcons.google,
-//                      ),
-//                    ],
-//                  ),
-//                )
             ],
           ),
         ),

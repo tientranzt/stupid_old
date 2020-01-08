@@ -49,8 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         .setData({'name': currentUser.email, 'score': '0'})
                   }
               });
-//        _userLoginController.clear();
-//        _passLoginController.clear();
+          _userLoginController.clear();
+          _passLoginController.clear();
 
           Navigator.pushNamed(context, 'home', arguments: [currentUser.email]);
 
@@ -58,8 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
             showSpinner = false;
           });
         }
-
-
       } catch (err) {
         setState(() {
           showSpinner = false;
@@ -68,18 +66,23 @@ class _LoginScreenState extends State<LoginScreen> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Lỗi đăng nhập',style: TextStyle(fontFamily: 'Quicksand')),
+                title: Text('Lỗi đăng nhập',
+                    style: TextStyle(fontFamily: 'Quicksand')),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text('Email hoặc tài khoản không đúng !',style: TextStyle(fontFamily: 'Quicksand')),
+                      Text('Email hoặc tài khoản không đúng !',
+                          style: TextStyle(fontFamily: 'Quicksand')),
                     ],
                   ),
                 ),
-                actions: <Widget>[FlatButton(
-                  child: Text('Để kiểm tra lại.',style: TextStyle(fontFamily: 'Quicksand')),
-                  onPressed: () => Navigator.of(context).pop(),
-                )],
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Để kiểm tra lại.',
+                        style: TextStyle(fontFamily: 'Quicksand')),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
               );
             });
       }
@@ -91,17 +94,22 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Lỗi đăng nhập', style: TextStyle(fontFamily: 'Quicksand'),),
+              title: Text(
+                'Lỗi đăng nhập',
+                style: TextStyle(fontFamily: 'Quicksand'),
+              ),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('Email và mật khẩu không được trống!',style: TextStyle(fontFamily: 'Quicksand')),
+                    Text('Email và mật khẩu không được trống!',
+                        style: TextStyle(fontFamily: 'Quicksand')),
                   ],
                 ),
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text('Để kiểm tra lại.',style: TextStyle(fontFamily: 'Quicksand')),
+                  child: Text('Để kiểm tra lại.',
+                      style: TextStyle(fontFamily: 'Quicksand')),
                   onPressed: () => Navigator.of(context).pop(),
                 )
               ],
@@ -160,24 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passLoginController,
                     obscureText: true,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Duy trì đăng nhập',
-                        style: TextStyle(fontFamily: 'Quicksand'),
-                      ),
-                      Checkbox(
-                          checkColor: Color(0xFF237658),
-                          activeColor: Colors.white,
-                          value: keepLogin,
-                          onChanged: (isCheck) {
-                            setState(() {
-                              keepLogin = !keepLogin;
-                            });
-                          }),
-                    ],
-                  ),
+
                   SizedBox(
                     height: 50,
                   ),

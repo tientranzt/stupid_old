@@ -63,138 +63,149 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+
   @override
   void initState() {
-    _getSaveImage();
     super.initState();
+    _getSaveImage();
   }
 
   @override
   Widget build(BuildContext context) {
     final List<dynamic> nameUser = ModalRoute.of(context).settings.arguments;
     final String name = nameUser[0].split('@')[0];
-    final sizeScreen = (MediaQuery.of(context).size.height) / 2;
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Color(0xFF237658),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              height: sizeScreen,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF4eca9d),
-                      Color(0xFF35b183),
-                      Color(0xFF2b906b),
-                      Color(0xFF237658),
-                    ]),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(
-                            color: Colors.yellowAccent,
-                          ),
-                        ),
-                        child: PopupMenuButton(
-                          onSelected: (Media val) {
-                            getImage(val);
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)),
-                          itemBuilder: (context) => <PopupMenuEntry<Media>>[
-                            PopupMenuItem<Media>(
-                              value: Media.camera,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Icon(Icons.camera_alt),
-                                  Text('Chụp ảnh'),
-                                ],
-                              ),
+        backgroundColor: Color(0xFFFFFFFF),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xFF4eca9d),
+                        Color(0xFF35b183),
+                        Color(0xFF2b906b),
+                        Color(0xFF237658),
+                      ]),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(top: 30),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: Colors.yellowAccent,
                             ),
-                            PopupMenuItem<Media>(
-                              value: Media.gallery,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Icon(Icons.picture_in_picture),
-                                  Text('Chọn ảnh'),
-                                ],
+                          ),
+                          child: PopupMenuButton(
+                            onSelected: (Media val) {
+                              getImage(val);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            itemBuilder: (context) => <PopupMenuEntry<Media>>[
+                              PopupMenuItem<Media>(
+                                value: Media.camera,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Icon(Icons.camera_alt),
+                                    Text('Chụp ảnh'),
+                                  ],
+                                ),
                               ),
-                            )
-                          ],
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 45,
-                            backgroundImage: _image == null
-                                ? AssetImage('assets/images/account.jpg')
-                                : FileImage(_image),
+                              PopupMenuItem<Media>(
+                                value: Media.gallery,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Icon(Icons.picture_in_picture),
+                                    Text('Chọn ảnh'),
+                                  ],
+                                ),
+                              )
+                            ],
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 45,
+                              backgroundImage: _image == null
+                                  ? AssetImage('assets/images/account.jpg')
+                                  : FileImage(_image),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        name,
-                        style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            fontSize: 15,
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          name,
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        FlatButton.icon(
+                          onPressed: () {
+                            _auth.signOut();
+                            Navigator.pushNamed(context, 'login');
+                          },
+                          icon: Icon(
+                            Icons.exit_to_app,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlatButton.icon(
-                        onPressed: () {
-                          _auth.signOut();
-                          Navigator.pushNamed(context, 'login');
-                        },
-                        icon: Icon(
-                          Icons.exit_to_app,
-                          color: Colors.white,
+                          ),
+                          label: Text(
+                            'Đăng xuất',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        label: Text(
-                          'Thoát',
-                          style: TextStyle(color: Colors.white),
+                        Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 15),
+                            child: DashSeparator())
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        CircleIcon(
+                          icon: Icons.timeline,
+                          title: 'Danh hiệu',
+                          score: '5',
                         ),
-                      ),
-                      Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                          child: DashSeparator())
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      CircleIcon(
-                        icon: Icons.timeline,
-                        title: 'Danh hiệu',
-                        score: '5',
-                      ),
                       StreamBuilder<QuerySnapshot>(
                           stream: _firestore
                               .collection('scores')
                               .where('name', isEqualTo: nameUser[0])
                               .snapshots(),
                           builder: (context, snapshot) {
-                            String score = snapshot.data.documents[0]['score'];
+                            if(snapshot.hasData){
+                              String score = snapshot.data.documents[0]['score'];
+                              return CircleIcon(
+                                icon: Icons.star,
+                                title: 'Độ ngu',
+                                score: score,
+                              );
+                            }
                             return CircleIcon(
                               icon: Icons.star,
                               title: 'Độ ngu',
-                              score: score,
+                              score: 'N/A',
                             );
+
                           }),
                       StreamBuilder<QuerySnapshot>(
                           stream: _firestore
@@ -202,38 +213,47 @@ class _HomeScreenState extends State<HomeScreen> {
                               .orderBy('score')
                               .snapshots(),
                           builder: (context, snapshot) {
-                            int rank = 0;
-                            var users = snapshot.data.documents;
-                            for (var i = 0; i < users.length; i++) {
-                              if (users[i]['name'] == nameUser[0]) {
-                                rank = i + 1;
-                                break;
+                            if(snapshot.hasData) {
+                              int rank = 0;
+                              var users = snapshot.data.documents;
+                              for (var i = 0; i < users.length; i++) {
+                                if (users[i]['name'] == nameUser[0]) {
+                                  rank = i + 1;
+                                  break;
+                                }
                               }
+                              return CircleIcon(
+                                icon: Icons.supervisor_account,
+                                title: 'Hạng ngu',
+                                score: rank.toString(),
+                              );
                             }
                             return CircleIcon(
                               icon: Icons.supervisor_account,
                               title: 'Hạng ngu',
-                              score: rank.toString(),
+                              score: 'N/A',
                             );
                           }),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 15,)
+                  ],
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: GameList(
-                loginUser: nameUser[0],
-              ),
-              height: sizeScreen,
-              decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40))),
-            )
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                padding: EdgeInsets.all(10),
+                child: GameList(
+                  loginUser: nameUser[0],
+                ),
+                decoration: BoxDecoration(
+                    color: Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40))),
+              )
+            ],
+          ),
         ),
       ),
     );
