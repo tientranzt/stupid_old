@@ -17,7 +17,7 @@ void main() => runApp(
         ],
         child:
         MaterialApp(
-          initialRoute: LoginScreen.id,
+          initialRoute: HomeScreen.id,
           routes: {
             LoginScreen.id: (_) => LoginScreen(),
             CreateAccountScreen.id: (_) => CreateAccountScreen(),

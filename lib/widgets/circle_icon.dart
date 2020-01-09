@@ -11,7 +11,7 @@ class CircleIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       CircleAvatar(
-        radius: 18,
+        radius: title == 'Độ ngu'? 30 : 18,
         backgroundColor: Color(0xFFcccc00),
         child: Icon(icon, color: Color(0xFF2b906b)),
       ),
