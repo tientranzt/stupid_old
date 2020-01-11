@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_stupid/pages/login_sceen.dart';
 
 class SubmitButton extends StatelessWidget {
   final String title;
