@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
         print(user == null);
         if (user != null) {
           final currentUser = await _auth.currentUser();
-          var isUserStoreExist = _firestore
+          var isUserStoreExist =  _firestore
               .collection('scores')
               .where('name', isEqualTo: currentUser.email)
               .getDocuments();
@@ -46,11 +46,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     _firestore
                         .collection('scores')
                         .document(currentUser.email)
-                        .setData({'name': currentUser.email, 'score': '0'})
+                        .setData({'name': currentUser.email, 'score': '0','isTest': 0})
                   }
               });
-          _userLoginController.clear();
-          _passLoginController.clear();
+
+
+
+//          lúc chưa tạo đc docment chuyển route lỗi cmnl
 
           Navigator.pushNamed(context, 'home', arguments: [currentUser.email]);
 
@@ -62,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           showSpinner = false;
         });
+        print('loi');
         showDialog(
             context: context,
             builder: (context) {
@@ -71,7 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text('Email hoặc tài khoản không đúng !',
+                      Text('Kiểm tra kết nối!',
+                          style: TextStyle(fontFamily: 'Quicksand')),
+
+                      Text('Chắc chắn email và tài khoản chính xác!',
                           style: TextStyle(fontFamily: 'Quicksand')),
                     ],
                   ),
